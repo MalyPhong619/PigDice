@@ -1,68 +1,45 @@
 // business logic
-var add = function(a, b) {
-  return a + b;
-}
-
-var player1 = new Players ("Victoria");
-var player2 = new Players ("Maly");
+var player1 = new Players ("Maly");
+var player2 = new Players ("Victoria");
 
 function Players(name, score, dice) {
   this.name = name,
-  this.score = [],
   this.dice = dice,
   this.totalScore = 0
 }
 
-Players.prototype.diceRoll = function(dice) {
-    this.dice = Math.floor(Math.random() * 6) + 1;
+function diceRoll() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
+Players.prototype.rolling = function() {
+  this.dice = diceRoll();
     if (this.dice === 1) {
-      this.score = [];
     } else if (this.dice >= 2 || this.dice <=6 && this.dice !== 1) {
-    this.score.push(this.dice);
-  }
-  return this.totalScore = this.score.reduce(add, 0);
+      this.totalScore += this.dice;
+  } return;
 }
 
 Players.prototype.holding = function() {
-  if (this.dice >=2 || this.dice <=6 && this.dice !== 1) {
-    this.score.push(this.dice);
-  }
-  return this.totalScore = this.score.reduce(add, 0);
-  this.score = [];
+  return ;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-//Prints dice roll to the page
-function printNumber(number) {
-  var placeholder = document.getElementById('placeholder');
-  placeholder.innerHTML = number;
-}
 // // useriterface logic
-$(document).ready(function(){
-  var rollButton = document.getElementById('roll-button');
-  var holdButton = document.getElementById('hold-button');
+$(document).ready(function() {
 
 
-  rollButton.onclick = function() {
-    var result = player1.diceRoll();
-    printNumber(result);
+  $("#roll-button").click(function() {
+    player1.rolling();
+  $("#placeholder").text(player1.dice);
+  console.log(player1);
+
+  })
+  $("#hold-button").click(function() {
+    player1.holding();
+    $("#player1-game").text(player1.totalScore);
     console.log(player1);
-    };
 
-  holdButton.onclick = function() {
-    var result = player1.holding();
-    printNumber(result);
-  };
-
+  })
 
 });
