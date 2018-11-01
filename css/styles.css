@@ -17,8 +17,12 @@ button {
 #placeholder {
   height: 100px;
   width: 100px;
-  margin: 50px auto;
+  margin: 55px auto;
   border: 1px solid gray;
   border-radius: 10px;
   font-size:80px;
+}
+
+#players-display {
+  display: none;
 }
